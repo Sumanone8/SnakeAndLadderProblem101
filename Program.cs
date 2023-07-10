@@ -7,6 +7,7 @@ namespace SnakeAndLadderProblem101
         static void Main(string[] args)
         {
             Console.WriteLine("Hey Fellow Learners!\nWelcome to Snake and Ladder Problem.");
+            SnakeAndLadderSinglePlayer snakeAndLadder = new SnakeAndLadderSinglePlayer();
         }
     }
 }
