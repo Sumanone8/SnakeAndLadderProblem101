@@ -46,6 +46,9 @@ namespace SnakeAndLadderProblem101
 
                     if (newPosition <= 100)
                         position = newPosition;
+
+                    if (position == 100)
+                        break;
                 }
                 else
                 {
@@ -58,4 +61,7 @@ namespace SnakeAndLadderProblem101
         }
     }
 }
+
+
+
 
