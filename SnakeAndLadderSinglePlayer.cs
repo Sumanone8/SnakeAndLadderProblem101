@@ -8,7 +8,7 @@ namespace SnakeAndLadderProblem101
         {
             Console.WriteLine("For Single Player");
             int position = 0;
-            int newPosition = 0;
+            int diceRolls = 0;
 
             while (position < 100)
             {
@@ -19,22 +19,23 @@ namespace SnakeAndLadderProblem101
                 Random random = new Random();
                 int diceRoll = random.Next(1, 7);
 
+                diceRolls++; // Increment dice roll counter
+
                 if (position + diceRoll <= 100)
                 {
-                    if (newPosition < 0)
-                        newPosition = 0;
+                    int newPosition = position + diceRoll;
 
                     int option = random.Next(0, 3);
 
                     if (option == 1) // Ladder
                     {
-                        newPosition = position + diceRoll;
+                        newPosition += diceRoll;
                         Console.WriteLine("Dice rolled: " + diceRoll);
                         Console.WriteLine("Congratulations! You climbed a ladder and moved forward by " + diceRoll + " steps. \nNow you are at " + newPosition);
                     }
                     else if (option == 2) // Snake
                     {
-                        newPosition = position - diceRoll;
+                        newPosition -= diceRoll;
                         Console.WriteLine("Dice rolled: " + diceRoll);
                         Console.WriteLine("Oh no! You got bitten by a snake and moved backward by " + diceRoll + " steps.");
                         Console.WriteLine("Now you are at " + newPosition);
@@ -47,8 +48,8 @@ namespace SnakeAndLadderProblem101
                     if (newPosition <= 100)
                         position = newPosition;
 
-                    if (position == 100)
-                        break;
+                    Console.WriteLine("Dice rolls: " + diceRolls);
+                    Console.WriteLine("Current position: " + position);
                 }
                 else
                 {
@@ -57,11 +58,10 @@ namespace SnakeAndLadderProblem101
             }
 
             Console.WriteLine("Congratulations! You reached position 100 and won the game!");
+            Console.WriteLine("Total dice rolls: " + diceRolls);
             Console.ReadKey();
         }
     }
 }
-
-
 
 
