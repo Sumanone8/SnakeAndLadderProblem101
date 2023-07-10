@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SnakeAndLadderProblem101
 {
@@ -12,37 +8,54 @@ namespace SnakeAndLadderProblem101
         {
             Console.WriteLine("For Single Player");
             int position = 0;
-            Console.WriteLine("Current position: " + position);
-            Console.WriteLine("Press any key to roll the dice...");
-            Console.ReadKey();
+            int newPosition = 0;
 
-            Random random = new Random();
-            int diceRoll = random.Next(1, 7);
-            Console.WriteLine("Dice rolled: " + diceRoll);
-
-            int option = random.Next(0, 3);
-            switch (option)
+            while (position < 100)
             {
-                case 0:
-                    Console.WriteLine("No Play! You stay at the current position.");
-                    break;
-                case 1:
-                    int ladderSteps = random.Next(1, 7);
-                    Console.WriteLine("Congratulations! You climbed a ladder and move forward by " + ladderSteps + " steps.");
-                    position += ladderSteps;
-                    break;
-                case 2:
-                    int snakeSteps = random.Next(1, 7);
-                    Console.WriteLine("Oh no! You got bitten by a snake and move backward by " + snakeSteps + " steps.");
-                    position -= snakeSteps;
-                    break;
+                Console.WriteLine("Current position: " + position);
+                Console.WriteLine("Press any key to roll the dice...");
+                Console.ReadKey();
+
+                Random random = new Random();
+                int diceRoll = random.Next(1, 7);
+
+                if (position + diceRoll <= 100)
+                {
+                    if (newPosition < 0)
+                        newPosition = 0;
+
+                    int option = random.Next(0, 3);
+
+                    if (option == 1) // Ladder
+                    {
+                        newPosition = position + diceRoll;
+                        Console.WriteLine("Dice rolled: " + diceRoll);
+                        Console.WriteLine("Congratulations! You climbed a ladder and moved forward by " + diceRoll + " steps. \nNow you are at " + newPosition);
+                    }
+                    else if (option == 2) // Snake
+                    {
+                        newPosition = position - diceRoll;
+                        Console.WriteLine("Dice rolled: " + diceRoll);
+                        Console.WriteLine("Oh no! You got bitten by a snake and moved backward by " + diceRoll + " steps.");
+                        Console.WriteLine("Now you are at " + newPosition);
+                    }
+                    else // No Play
+                    {
+                        Console.WriteLine("No Play! Stay at the same position.");
+                    }
+
+                    if (newPosition <= 100)
+                        position = newPosition;
+                }
+                else
+                {
+                    Console.WriteLine("Oops! Your Dice Roll is more than needed. Try again!");
+                }
             }
 
-            // Check if the position is negative
-            if (position < 0)
-                position = 0;
-
+            Console.WriteLine("Congratulations! You reached position 100 and won the game!");
+            Console.ReadKey();
         }
-
     }
 }
+
